@@ -11,6 +11,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import replace
+import requests
 
 # Por informações do seu bot.########
 api_key = '5650157973:AAHoljPGgxNeyVmk-lGzE1-YiKVsaJ--45w'  # TOKEN DO SEU BOT
