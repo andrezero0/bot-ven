@@ -13,8 +13,8 @@ from selenium.webdriver.common.by import By
 import replace
 
 # Por informações do seu bot.########
-api_key = '6131410805:AAHi7mKTiRM8vG96Wt0tPKmtJbpDJH6U8dA'  # TOKEN DO SEU BOT
-chat_id = '-1001503900234' # ID DO CANAL pladix
+api_key = '5650157973:AAHoljPGgxNeyVmk-lGzE1-YiKVsaJ--45w'  # TOKEN DO SEU BOT
+chat_id = '-1001829510303' # ID DO CANAL pladix
 #####################################
 bot = telebot.TeleBot(token=api_key)
 
@@ -43,6 +43,8 @@ analisar_pandão13 = 0
 analisar_pandão14 = 0
 
 
+
+
 analisar_open = 0
 resultsDouble = []
 
@@ -52,7 +54,45 @@ mensage_delete = False
 
 while True:
 
-    
+    def alert_olhar():
+            global mensage_ids
+            global mensage_delete
+
+            message_id = bot.send_message(
+            chat_id, text='''
+⚠️ DE OLHO NA BLAZE ⚠️
+            ''').message_id
+            mensage_ids = message_id
+            mensage_delete = True
+            return  
+    def delet_olhar():
+        global mensage_ids
+        global mensage_delete
+
+        if  mensage_delete == True:
+            bot.delete_message(chat_id=chat_id, message_id=mensage_ids)
+            mensage_delete = False
+        
+    def alert_entra():
+            global mensage_ids
+            global mensage_delete
+
+            message_id = bot.send_message(
+            chat_id, text='''
+PADRÃO DO BRANCO ⚪️ 🧨
+ENTRADA AGORA 🔥
+🎰
+            ''').message_id
+            mensage_ids = message_id
+            mensage_delete = True
+            return  
+    def delet_entra():
+        global mensage_ids
+        global mensage_delete
+
+        if  mensage_delete == True:
+            bot.delete_message(chat_id=chat_id, message_id=mensage_ids)
+            mensage_delete = False
 
     def qualnum(x):
         if x == '0':
@@ -229,7 +269,6 @@ while True:
             finalnum = list(mapeando)
             finalcor = list(mapeando2) 
             finalcor3 = list(mapeando3) 
-            
     
  
             print(finalcor[0:5])
@@ -237,22 +276,37 @@ while True:
             
             
 
-
             def CHECK_VERSION(num):
                 global analisar_pandão1
                  
                 if analisar_pandão1 == 0:
-                    if num[0:3] == ['b','n','n']:
-                        analisar_pandão1 = 0
-                        bot.send_message(chat_id=chat_id, text= ('{} {},  {} {},  BRANCO'.format(finalcor3[2], finalnum[2], 
-                        finalcor3[1], finalnum[1])))
+                    if num[0:1] == ['n']:
+                        global ns1, ns2
+                        ns1 = finalnum[0:1]
+                        ns2 = finalnum[0:1]
+                        analisar_pandão1 = 1
+                        bot.send_message(chat_id=chat_id, text=('{}'.format(ns1)))
+                        print (ns1)
+                        return 
+                    
+                elif analisar_pandão1 == 1:
+                    if num[0:1] == ['n']:
+                        analisar_pandão1 = 2
+                        bot.send_message(chat_id=chat_id, text='passei aqui')
                         return
-                
-                
+                    
+                elif analisar_pandão1 == 2:    
+                    if  finalnum[0:1] == ns2:
+                        analisar_pandão1 = 0
+                        bot.send_message(chat_id=chat_id, text='ola')
+                        print ('{}'.format(ns1))
+                        return    
+                    else:
+                        analisar_pandão1 = 1   
+                        bot.send_message(chat_id=chat_id, text='Nuemro Em Analise {}'.format(ns1))
+                        return
+                    
+
+            checkVersion = CHECK_VERSION(finalnum)
             checkVersion = CHECK_VERSION(finalcor)
             checkVersion = CHECK_VERSION(finalcor3)
-            checkVersion = CHECK_VERSION(finalnum)
-
-            
-        
-            
