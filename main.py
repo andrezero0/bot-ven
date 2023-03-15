@@ -19,10 +19,9 @@ chat_id = '-1001829510303' # ID DO CANAL pladix
 #####################################
 bot = telebot.TeleBot(token=api_key)
 
-options = webdriver.ChromeOptions()
-options.add_argument('--headless')
-nav = webdriver.Chrome(service=Service(
-    ChromeDriverManager().install()), chrome_options=options)
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+nav = webdriver.Chrome(options=chrome_options)
 
 nav.get('https://blaze.com/pt/games/double')
 
